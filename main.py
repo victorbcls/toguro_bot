@@ -34,7 +34,7 @@ class TweetListener(tweepy.StreamListener):
             return
         else:
 
-            now = datetime.datetime.now()
+            now = datetime.datetime.now().strftime("%m/%d/%Y - %H:%M:%S")
 
             processing = f'{now} -> Processando tweet - {tweet.text}'
             msg = logger.info(processing)
@@ -55,7 +55,7 @@ class TweetListener(tweepy.StreamListener):
 
                     api.update_status(
                         status=random.choice(frases), in_reply_to_status_id=self.tweet_id, auto_populate_reply_metadata=True)
-                    now = datetime.datetime.now()
+                    now = datetime.datetime.now().strftime("%m/%d/%Y - %H:%M:%S")
 
                     logger.info({
                         "Status": "OK",
@@ -72,7 +72,7 @@ class TweetListener(tweepy.StreamListener):
 
                     }))
                 except tweepy.error.TweepError as error:
-                    now = datetime.datetime.now()
+                    now = datetime.datetime.now().strftime("%m/%d/%Y - %H:%M:%S")
 
                     print(str({
                         "Status": "Warning",
@@ -91,7 +91,18 @@ class TweetListener(tweepy.StreamListener):
                         "Time": now
 
                     })
-                    sleep(300)
+                    if '429' in str(error):
+                        print("Faltam 5 minutos para a próxima tentativa")
+                        sleep(60)
+                        print("Faltam 4 minutos para a próxima tentativa")
+                        sleep(60)
+                        print("Faltam 3 minutos para a próxima tentativa")
+                        sleep(60)
+                        print("Faltam 2 minutos para a próxima tentativa")
+                        sleep(60)
+                        print("Faltam 1 minutos para a próxima tentativa")
+                        sleep(60)
+                        print("Vou tentar denovo")
 
                     pass
 

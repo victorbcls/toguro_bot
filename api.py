@@ -2,7 +2,7 @@ import tweepy
 import logging
 import env
 import datetime
-now = datetime.datetime.now()
+now = datetime.datetime.now().strftime("%m/%d/%Y - %H:%M:%S")
 logger = logging.getLogger()
 
 
