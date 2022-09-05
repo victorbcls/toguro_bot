@@ -1,7 +1,8 @@
 import tweepy
 import logging
 import env
-
+import datetime
+now = datetime.datetime.now()
 logger = logging.getLogger()
 
 
@@ -17,5 +18,5 @@ def create_api():
         logger.error("Erro criando a API", exc_info=True)
         raise e
     print("API CRIADA")
-    logger.info("API criada")
+    logger.info(f"{now} -> API criada")
     return api

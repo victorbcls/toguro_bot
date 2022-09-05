@@ -1,7 +1,9 @@
+from time import sleep
 import tweepy
 import logging
 from api import create_api
 import random
+import datetime
 logging.basicConfig(filename="toguro.log", level=logging.INFO)
 logger = logging.getLogger('toguro')
 
@@ -31,7 +33,10 @@ class TweetListener(tweepy.StreamListener):
         if tweet.user.id == self.me.id:
             return
         else:
-            processing = f'Processando tweet - {tweet.text}'
+
+            now = datetime.datetime.now()
+
+            processing = f'{now} -> Processando tweet - {tweet.text}'
             msg = logger.info(processing)
             self.tweet_id = tweet.id
             try:
@@ -44,35 +49,47 @@ class TweetListener(tweepy.StreamListener):
                 # aqui existe um bug... Se alguem retuitar um tweet que o bot ja curtiu/comentou, ele passa por essa verificação.
                 # não chega a quebrar o app, só registra no log com warning. logo mais descubro como resolver
                 try:
+
                     print(msg)
                     tweet.favorite()
 
                     api.update_status(
                         status=random.choice(frases), in_reply_to_status_id=self.tweet_id, auto_populate_reply_metadata=True)
+                    now = datetime.datetime.now()
 
                     logger.info({
                         "Status": "OK",
                         "Tweet ID": self.tweet_id,
-                        "Link": f"https://twitter.com/twitter/status/{self.tweet_id}"
+                        "Link": f"https://twitter.com/twitter/status/{self.tweet_id}",
+                        "Time": now
+
                     })
                     print(str({
                         "Status": "OK",
                         "Tweet ID": self.tweet_id,
-                        "Link": f"https://twitter.com/twitter/status/{self.tweet_id}"
+                        "Link": f"https://twitter.com/twitter/status/{self.tweet_id}",
+                        "Time": now
+
                     }))
                 except tweepy.error.TweepError as error:
+                    now = datetime.datetime.now()
 
                     print(str({
                         "Status": "Warning",
                         "Tweet ID": self.tweet_id,
                         "Link": f"https://twitter.com/twitter/status/{self.tweet_id}",
-                        "Error": str(error)
+
+                        "Error": str(error),
+                        "Time": now
+
                     }))
                     logger.error({
                         "Status": "Warning",
                         "Tweet ID": self.tweet_id,
                         "Link": f"https://twitter.com/twitter/status/{self.tweet_id}",
-                        "Error": str(error)
+                        "Error": str(error),
+                        "Time": now
+
                     })
                     sleep(300)
 
