@@ -1,3 +1,4 @@
+from time import sleep
 import tweepy
 import logging
 from api import create_api
@@ -66,6 +67,7 @@ class TweetListener(tweepy.StreamListener):
                         "Link": f"https://twitter.com/twitter/status/{self.tweet_id}",
                         "Error": str(error)
                     })
+                    sleep(300)
                     pass
 
     def on_error(self, status):

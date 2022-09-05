@@ -74,6 +74,8 @@ class TweetListener(tweepy.StreamListener):
                         "Link": f"https://twitter.com/twitter/status/{self.tweet_id}",
                         "Error": str(error)
                     })
+                    sleep(300)
+
                     pass
 
     def on_error(self, status):
