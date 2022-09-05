@@ -92,16 +92,12 @@ class TweetListener(tweepy.StreamListener):
 
                     })
                     if '429' in str(error):
+                        print("Faltam 15 minutos para a próxima tentativa")
+                        sleep(300)
+                        print("Faltam 10 minutos para a próxima tentativa")
+                        sleep(300)
                         print("Faltam 5 minutos para a próxima tentativa")
-                        sleep(60)
-                        print("Faltam 4 minutos para a próxima tentativa")
-                        sleep(60)
-                        print("Faltam 3 minutos para a próxima tentativa")
-                        sleep(60)
-                        print("Faltam 2 minutos para a próxima tentativa")
-                        sleep(60)
-                        print("Faltam 1 minutos para a próxima tentativa")
-                        sleep(60)
+                        sleep(300)
                         print("Vou tentar denovo")
 
                     pass
