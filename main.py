@@ -15,7 +15,7 @@ client = tweepy.Client(bearer_token=bearer_token, access_token=env.access_token,
 
 while True:
     response = client.search_recent_tweets(
-        query='toguro -is:retweet', max_results=25)
+        query='toguro -is:retweet', max_results=60)
 
     logging.basicConfig(filename="toguro.log", level=logging.INFO)
     logger = logging.getLogger('toguro')
