@@ -15,7 +15,7 @@ client = tweepy.Client(bearer_token=bearer_token, access_token=env.access_token,
 
 while True:
     response = client.search_recent_tweets(
-        query=' toguro -is:retweet', max_results=25)
+        query='toguro -is:retweet', max_results=25)
 
     logging.basicConfig(filename="toguro.log", level=logging.INFO)
     logger = logging.getLogger('toguro')
@@ -42,6 +42,11 @@ while True:
     tweets = response.data
 
     for tweet in tweets:
+        print(tweet)
+
+        if ' toguro' not in str(tweet) and ' Toguro' not in str(tweet):
+            print("NÂO TINHA PO")
+            continue
         try:
             status = api.get_status(tweet.id)
             if status.favorited == False:
