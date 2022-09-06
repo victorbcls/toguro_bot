@@ -43,8 +43,7 @@ while True:
 
     for tweet in tweets:
         print(tweet)
-
-        if ' toguro' not in str(tweet) and ' Toguro' not in str(tweet):
+        if ' toguro' not in str(tweet) and ' Toguro' not in str(tweet) and 'Toguro ' not in str(tweet) and 'toguro ' not in str(tweet):
             print("NÂO TINHA PO")
             continue
         try:
