@@ -15,7 +15,7 @@ client = tweepy.Client(bearer_token=bearer_token, access_token=env.access_token,
 
 while True:
     response = client.search_recent_tweets(
-        query='toguro -is:retweet', max_results=60)
+        query='toguro -is:retweet', max_results=100)
 
     logging.basicConfig(filename="toguro.log", level=logging.INFO)
     logger = logging.getLogger('toguro')
@@ -37,7 +37,10 @@ while True:
               "pega busão ou metrô pra estudar ou trabalhar, obrigatoriamente tem que estar shaypado",
               "tá acordando agora pra trabalhar, ganha menos de 3 mil por mês, obrigatoriamente tem que estar shaypado",
               "joga free Fire, ten menos de 1 milhão na conta, obrigatoriamente tem que ser shaypado",
-              "se você joga minecraft, obrigatoriamente precisa estar no Shape"]
+              "se você joga minecraft, obrigatoriamente precisa estar no Shape",
+              "fuma maconha e não bebe álcool, obrigatoriamente e necessariamente precisa estar shaypado",
+              "ano da copa, ano da eleição"
+              "Shape disse por noix"]
 
     tweets = response.data
 
@@ -85,4 +88,4 @@ while True:
 
             })
             pass
-        sleep(60)
+        sleep(10)
